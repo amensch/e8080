@@ -56,8 +56,8 @@
     <Compile Include="Intel8080\IOutputDevice.cs" />
     <Compile Include="Loader\FileLoader.cs" />
     <Compile Include="Loader\ICodeLoader.cs" />
-    <Compile Include="Machine8080\ActionDevice.cs" />
     <Compile Include="Machine8080\ArcadePort1.cs" />
+    <Compile Include="Machine8080\ArcadePort2.cs" />
     <Compile Include="Machine8080\ShiftOffsetDevice.cs" />
     <Compile Include="Machine8080\ShiftDevice.cs" />
     <Compile Include="Machine8080\SoundDevice.cs" />

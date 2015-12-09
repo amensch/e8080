@@ -9,7 +9,7 @@ namespace eCPU.Machine8080
 {
     public class ShiftOffsetDevice : IOutputDevice
     {
-        private object _lock;
+        private object _lock = new object();
         private byte _shiftOffset = 0x00;
 
         public byte Read()

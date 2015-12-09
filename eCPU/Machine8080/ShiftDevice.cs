@@ -11,7 +11,7 @@ namespace eCPU.Machine8080
     {
         private UInt16 _shiftReg;
         private ShiftOffsetDevice _shiftOffset;
-        private object _lock;
+        private object _lock = new object();
 
         public ShiftDevice(ShiftOffsetDevice device)
         {

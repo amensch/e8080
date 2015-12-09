@@ -75,5 +75,11 @@ namespace eCPU.Screens
         {
 
         }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+            //Key k = Keys.d
+        }
     }
 }

@@ -52,6 +52,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(283, 246);
             this.Controls.Add(this.pbWindow);
+            this.KeyPreview = true;
             this.Name = "GameWindow";
             this.Text = "GameWindow";
             ((System.ComponentModel.ISupportInitialize)(this.pbWindow)).EndInit();

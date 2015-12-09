@@ -50,10 +50,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ArcadePortTests.cs" />
     <Compile Include="i8080ConditionalRegisterTests.cs" />
     <Compile Include="i8080OpTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="i8080RegisterTests.cs" />
+    <Compile Include="ShiftRegisterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eCPU\eCPU.csproj">

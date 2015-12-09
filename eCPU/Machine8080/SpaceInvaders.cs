@@ -9,22 +9,6 @@ namespace eCPU.Machine8080
     public class SpaceInvaders
     {
 
-        private const byte PORT1_COIN = 0x00;
-        private const byte PORT1_P2_START = 0x02;
-        private const byte PORT1_P1_START = 0x04;
-        private const byte PORT1_P1_SHOOT = 0x10;
-        private const byte PORT1_P1_LEFT = 0x20;
-        private const byte PORT1_P1_RIGHT = 0x40;
-
-        private const byte PORT2_NUM_LIVES_0 = 0x00;
-        private const byte PORT2_NUM_LIVES_1 = 0x02;
-        private const byte PORT2_TILT = 0x04;
-        private const byte PORT2_BONUS_LIFE = 0x08;
-        private const byte PORT2_P2_SHOOT = 0x10;
-        private const byte PORT2_P2_LEFT = 0x20;
-        private const byte PORT2_P2_RIGHT = 0x40;
-
-
         private i8080 _cpu;
 
         private Stopwatch _sw;
@@ -39,6 +23,8 @@ namespace eCPU.Machine8080
         {
             _exit = false;
         }
+
+
 
         public i8080 CPU
         {
@@ -98,10 +84,10 @@ namespace eCPU.Machine8080
             _cpu.AddOutputDevice(_device, 4);
 
             // add sound port 3
-            _cpu.AddOutputDevice(new SoundPort(), 3);
+            _cpu.AddOutputDevice(new SoundDevice(), 3);
 
             // add sound port 5
-            _cpu.AddOutputDevice(new SoundPort(), 5);
+            _cpu.AddOutputDevice(new SoundDevice(), 5);
 
         }
         
@@ -111,6 +97,8 @@ namespace eCPU.Machine8080
             Array.Copy(CPU.Memory, 0x2400, vram, 0, 7168);
             return vram;
         }
+
+
 
         private void RunCycle()
         {
