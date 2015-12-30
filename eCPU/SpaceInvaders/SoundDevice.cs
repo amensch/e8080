@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using eCPU.Intel8080;
+﻿using eCPU.Intel8080;
 using System.Diagnostics;
 using System.Media;
 

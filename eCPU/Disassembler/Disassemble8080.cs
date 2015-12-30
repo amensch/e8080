@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using eCPU.Intel8080;
 
-namespace eCPU
+namespace eCPU.Intel8080
 {
-
     class Disassemble8080 : ICodeDisassembler
     {
-
         public string Disassemble(ICodeLoader loader)
         {
             return Disassemble(loader, 0x00);

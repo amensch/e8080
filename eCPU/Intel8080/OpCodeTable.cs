@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace eCPU.CPU
+namespace eCPU.Intel8080
 {
     public class OpCodeTable
     {

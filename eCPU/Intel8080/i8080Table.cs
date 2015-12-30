@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using eCPU.CPU;
-
+﻿
 namespace eCPU.Intel8080
 {
     public class i8080Table

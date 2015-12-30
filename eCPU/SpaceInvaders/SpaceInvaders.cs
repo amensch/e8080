@@ -2,13 +2,18 @@
 using eCPU.Intel8080;
 using System.Diagnostics;
 using System.Timers;
-using System.IO;
 using System.Windows.Forms;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace eCPU.SpaceInvaders
 {
     public class SpaceInvaders
     {
+
+        private const int IMAGE_WIDTH = 256;
+        private const int IMAGE_HEIGHT = 224;
+
         private const byte START_VBLANK_OPCODE = 0xcf;
         private const byte END_VBLANK_OPCODE = 0xd7;
 
@@ -16,28 +21,25 @@ namespace eCPU.SpaceInvaders
         private int VBLANK_INTERRUPT = 16666;
         private byte _next_vblank_opcode = END_VBLANK_OPCODE;
 
+        // CPU and I/O devices
         private i8080 _cpu;
         private ArcadePort1 _port1 = new ArcadePort1((int)Keys.C, (int)Keys.D1, (int)Keys.D2, (int)Keys.Up, (int)Keys.Left, (int)Keys.Right);
         private ArcadePort2 _port2 = new ArcadePort2((int)Keys.E, (int)Keys.S, (int)Keys.F);
         private SoundDevice _sound3 = new SoundDevice(3);
         private SoundDevice _sound5 = new SoundDevice(5);
 
+        // Screen Image
+        private Image _screen;
+
+        // timers for proper CPU execution time
         private Stopwatch _sw;
         private System.Timers.Timer _timer;
 
+        // statistics counters
         private long _lastTimeValue = 0;
         private long _cycleCount = 0;
         private long _instructionCount = 0;
         private long _vblankCount = 0;
-
-        public delegate void DrawDelegate();
-        private DrawDelegate _draw;
-
-        // Attach draw function from UI 
-        public void AttachDrawDelegate( DrawDelegate drawFunction )
-        {
-            _draw = drawFunction;
-        }
 
         public i8080 CPU
         {
@@ -51,7 +53,41 @@ namespace eCPU.SpaceInvaders
             _cycleCount = 0;
             _instructionCount = 0;
             _vblankCount = 0;
+            InitScreen();
             LoadProgram(0x00);
+        }
+
+        private void InitScreen()
+        {
+            using (Bitmap bmp = new Bitmap(IMAGE_WIDTH, IMAGE_HEIGHT))
+            {
+                using (Graphics g = Graphics.FromImage(bmp))
+                {
+                    g.FillRectangle(Brushes.Black, 0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
+                }
+                _screen = (Image)bmp.Clone();
+            }
+        }
+
+        public Image GetScreen()
+        {
+            return (Image)_screen.Clone();
+        }
+
+        private void DrawScreen()
+        {
+            byte[] vram = GetVideoRAM();
+            GCHandle gc = GCHandle.Alloc(vram, GCHandleType.Pinned);
+
+            Array.Reverse(vram);
+            gc.Free();
+
+            IntPtr ptr = Marshal.UnsafeAddrOfPinnedArrayElement(vram, 0);
+            using (Bitmap bmp = new Bitmap(IMAGE_WIDTH, IMAGE_HEIGHT, 32, System.Drawing.Imaging.PixelFormat.Format1bppIndexed, ptr))
+            {
+                bmp.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                _screen = (Image)bmp.Clone();
+            }
         }
 
         private void LoadProgram(UInt16 startingAddress)
@@ -164,10 +200,10 @@ namespace eCPU.SpaceInvaders
             {
                 RunOneInstruction();
             }
-            if (_draw != null) _draw();
+            DrawScreen();
         }
         
-        public byte[] GetVideoRAM()
+        private byte[] GetVideoRAM()
         {
             byte[] vram = new byte[7168];
             Array.Copy(CPU.Memory, 0x2400, vram, 0, 7168);
@@ -220,7 +256,7 @@ namespace eCPU.SpaceInvaders
                 else
                     _next_vblank_opcode = START_VBLANK_OPCODE;
 
-                if (_draw != null) _draw();
+                DrawScreen();
             }
             return cycles;
         }

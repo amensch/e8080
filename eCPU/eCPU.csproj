@@ -117,7 +117,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="SpaceInvaders\8080 Port Info.txt" />
+    <Content Include="SpaceInvaders\Space Invaders Port Info.txt" />
     <Content Include="SpaceInvaders\ROM\invaders.h">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
