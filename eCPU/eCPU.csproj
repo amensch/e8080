@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Disassembler\Disassemble8080.cs" />
     <Compile Include="Disassembler\ICodeDisassembler.cs" />
+    <Compile Include="IArcadeGame.cs" />
     <Compile Include="Intel8080\i8080.cs" />
     <Compile Include="Intel8080\i8080ProgramCounter.cs" />
     <Compile Include="Intel8080\i8080Registers.cs" />

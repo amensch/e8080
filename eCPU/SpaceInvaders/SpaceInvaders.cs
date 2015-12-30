@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace eCPU.SpaceInvaders
 {
-    public class SpaceInvaders
+    public class SpaceInvaders : IArcadeGame
     {
 
         private const int IMAGE_WIDTH = 256;
