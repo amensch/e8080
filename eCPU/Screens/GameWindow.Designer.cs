@@ -44,7 +44,6 @@
             this.pbWindow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbWindow.TabIndex = 0;
             this.pbWindow.TabStop = false;
-            this.pbWindow.Click += new System.EventHandler(this.pbWindow_Click);
             // 
             // GameWindow
             // 

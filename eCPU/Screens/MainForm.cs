@@ -16,9 +16,6 @@ namespace eCPU
 {
     public partial class MainForm : Form
     {
-        private long _count;
-        private long _cycles;
-
         private SpaceInvaders _invaders = new SpaceInvaders();
 
         public MainForm()
@@ -59,11 +56,7 @@ namespace eCPU
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            _count = 0;
-            _cycles = 0;
-
             _invaders.LoadProgram(0x00);
-
             WriteScreen();
         }
 
@@ -71,14 +64,16 @@ namespace eCPU
         {
             txtPC.Text = _invaders.CPU.Registers.ProgramCounter.Value.ToString("X4");
             txtSP.Text = _invaders.CPU.Registers.StackPointer.ToString("X4");
-            txtPSW.Text = _invaders.CPU.Registers.RegPSW.ToString("X4");
+            txtRegA.Text = _invaders.CPU.Registers.RegA.ToString("X2");
             txtBC.Text = _invaders.CPU.Registers.RegBC.ToString("X4");
             txtDE.Text = _invaders.CPU.Registers.RegDE.ToString("X4");
             txtHL.Text = _invaders.CPU.Registers.RegHL.ToString("X4");
 
             string flags = "";
-
-
+            if (_invaders.CPU.Registers.CondReg.AuxCarryFlag)
+                flags += "A";
+            else
+                flags += ".";
             if (_invaders.CPU.Registers.CondReg.CarryFlag)
                 flags += "C";
             else
@@ -87,24 +82,18 @@ namespace eCPU
                 flags += "P";
             else
                 flags += ".";
-
-            if (_invaders.CPU.Registers.CondReg.ZeroFlag)
-                flags += "Z";
-            else
-                flags += ".";
             if (_invaders.CPU.Registers.CondReg.SignFlag)
                 flags += "S";
             else
                 flags += ".";
-
-            if (_invaders.CPU.Registers.CondReg.AuxCarryFlag)
-                flags += "A";
+            if (_invaders.CPU.Registers.CondReg.ZeroFlag)
+                flags += "Z";
             else
                 flags += ".";
-
             txtFlags.Text = flags;
-            txtCount.Text = _count.ToString("N0");
-            txtCycles.Text = _cycles.ToString("N0");
+
+            txtCount.Text = _invaders.CountOfInstructions.ToString("N0");
+            txtCycles.Text = _invaders.CountOfCycles.ToString("N0");
             string next;
             UInt32 bytes = Disassemble8080.DisassembleNext(_invaders.CPU.Memory, _invaders.CPU.Registers.ProgramCounter.Value, 0x00, out next);
             txtNext.Text = next;
@@ -112,87 +101,29 @@ namespace eCPU
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            _count++;
-            _cycles += _invaders.CPU.ExecuteNext();
+            _invaders.CPU.ExecuteNext();
             WriteScreen();
-        }
-
-        private string BoolToBit( bool value )
-        {
-            if (value)
-                return "1";
-            else 
-                return "0";
         }
 
         private void btnFire_Click(object sender, EventArgs e)
         {
             _invaders.Run();
-            //_opCount = new long[0x100];
-            //_last5 = new byte[5];
-            //byte op;
-
-            //for (int i = 0; i <= 0xff; i++)
-            //{
-            //    _opCount[i] = 0;
-            //}
-
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    _last5[i] = 0x00;
-            //}
-
-            //do
-            //{
-            //    op = _invaders.CPU.Memory[_invaders.CPU.Registers.ProgramCounter.Value];
-            //    AddLastOp(op);
-            //    _opCount[op]++;
-            //    _count++;
-            //    _cycles += _invaders.CPU.ExecuteNext();
-
-            //} while (_invaders.CPU.Registers.ProgramCounter.Value != 0x031d);
-
-            //WriteScreen();
         }
-
-        //private void AddLastOp( byte op )
-        //{
-        //    for (int i = 0; i < _last5.Length-1 ; i++)
-        //    {
-        //        _last5[i] = _last5[i + 1];
-        //    }
-        //    _last5[_last5.Length - 1] = op;
-        //}
 
         private void btnRunN_Click(object sender, EventArgs e)
         {
             int count = 0;
             if( int.TryParse(txtRun.Text, out count))
             {
-                for( int i=0; i < count; i++ )
-                {
-                    _count++;
-                    _cycles += _invaders.CPU.ExecuteNext();
-                }
-                WriteScreen();  
+                _invaders.RunInstructions(count); 
             }
-
+            WriteScreen();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             eCPU.Screens.GameWindow frm = new eCPU.Screens.GameWindow(_invaders);
             frm.Show();
-        }
-
-        private void btnInt1_Click(object sender, EventArgs e)
-        {
-            _invaders.CPU.AddInterrupt(1);
-        }
-
-        private void btnInt2_Click(object sender, EventArgs e)
-        {
-            _invaders.CPU.AddInterrupt(2);
         }
     }
 }

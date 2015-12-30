@@ -49,7 +49,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.txtCycles = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtPSW = new System.Windows.Forms.TextBox();
+            this.txtRegA = new System.Windows.Forms.TextBox();
             this.txtBC = new System.Windows.Forms.TextBox();
             this.txtDE = new System.Windows.Forms.TextBox();
             this.txtHL = new System.Windows.Forms.TextBox();
@@ -70,7 +70,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(54, 23);
             this.label1.TabIndex = 0;
-            this.label1.Text = "PSW";
+            this.label1.Text = "A";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtSP
@@ -171,7 +171,7 @@
             // btnLoad
             // 
             this.btnLoad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoad.Location = new System.Drawing.Point(297, 311);
+            this.btnLoad.Location = new System.Drawing.Point(294, 291);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(94, 28);
             this.btnLoad.TabIndex = 31;
@@ -182,18 +182,18 @@
             // btnNext
             // 
             this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNext.Location = new System.Drawing.Point(297, 345);
+            this.btnNext.Location = new System.Drawing.Point(413, 291);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(94, 28);
             this.btnNext.TabIndex = 32;
-            this.btnNext.Text = "Next";
+            this.btnNext.Text = "Run 1";
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnFire
             // 
             this.btnFire.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFire.Location = new System.Drawing.Point(297, 379);
+            this.btnFire.Location = new System.Drawing.Point(294, 328);
             this.btnFire.Name = "btnFire";
             this.btnFire.Size = new System.Drawing.Size(94, 28);
             this.btnFire.TabIndex = 33;
@@ -283,15 +283,15 @@
             this.label2.Text = "Cycles:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // txtPSW
+            // txtRegA
             // 
-            this.txtPSW.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPSW.Location = new System.Drawing.Point(273, 95);
-            this.txtPSW.Name = "txtPSW";
-            this.txtPSW.Size = new System.Drawing.Size(54, 22);
-            this.txtPSW.TabIndex = 42;
-            this.txtPSW.Text = "8888";
-            this.txtPSW.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtRegA.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRegA.Location = new System.Drawing.Point(273, 95);
+            this.txtRegA.Name = "txtRegA";
+            this.txtRegA.Size = new System.Drawing.Size(54, 22);
+            this.txtRegA.TabIndex = 42;
+            this.txtRegA.Text = "8888";
+            this.txtRegA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtBC
             // 
@@ -336,7 +336,7 @@
             // txtRun
             // 
             this.txtRun.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRun.Location = new System.Drawing.Point(534, 314);
+            this.txtRun.Location = new System.Drawing.Point(517, 331);
             this.txtRun.Name = "txtRun";
             this.txtRun.Size = new System.Drawing.Size(75, 22);
             this.txtRun.TabIndex = 48;
@@ -345,9 +345,9 @@
             // btnRunN
             // 
             this.btnRunN.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRunN.Location = new System.Drawing.Point(453, 310);
+            this.btnRunN.Location = new System.Drawing.Point(414, 325);
             this.btnRunN.Name = "btnRunN";
-            this.btnRunN.Size = new System.Drawing.Size(75, 31);
+            this.btnRunN.Size = new System.Drawing.Size(94, 28);
             this.btnRunN.TabIndex = 49;
             this.btnRunN.Text = "Run N";
             this.btnRunN.UseVisualStyleBackColor = true;
@@ -355,7 +355,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(380, 246);
+            this.button1.Location = new System.Drawing.Point(294, 237);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(97, 37);
             this.button1.TabIndex = 50;
@@ -372,7 +372,6 @@
             this.btnInt1.TabIndex = 51;
             this.btnInt1.Text = "Int 1";
             this.btnInt1.UseVisualStyleBackColor = true;
-            this.btnInt1.Click += new System.EventHandler(this.btnInt1_Click);
             // 
             // btnInt2
             // 
@@ -383,15 +382,12 @@
             this.btnInt2.TabIndex = 52;
             this.btnInt2.Text = "Int 2";
             this.btnInt2.UseVisualStyleBackColor = true;
-            this.btnInt2.Click += new System.EventHandler(this.btnInt2_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(656, 422);
-            this.Controls.Add(this.btnInt2);
-            this.Controls.Add(this.btnInt1);
+            this.ClientSize = new System.Drawing.Size(605, 420);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnRunN);
             this.Controls.Add(this.txtRun);
@@ -399,7 +395,7 @@
             this.Controls.Add(this.txtHL);
             this.Controls.Add(this.txtDE);
             this.Controls.Add(this.txtBC);
-            this.Controls.Add(this.txtPSW);
+            this.Controls.Add(this.txtRegA);
             this.Controls.Add(this.txtCycles);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label13);
@@ -451,7 +447,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox txtCycles;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtPSW;
+        private System.Windows.Forms.TextBox txtRegA;
         private System.Windows.Forms.TextBox txtBC;
         private System.Windows.Forms.TextBox txtDE;
         private System.Windows.Forms.TextBox txtHL;

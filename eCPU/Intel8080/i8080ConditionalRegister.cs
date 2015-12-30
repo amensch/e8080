@@ -22,7 +22,8 @@ namespace eCPU.Intel8080
 
         public i8080ConditionalRegister()
         {
-            Register = 0x02;  // bit 1 is unused but always 1
+            // in the real CPU bit 1 is unused and always 1
+            Register = 0x00;  
         }
 
         public bool CarryFlag

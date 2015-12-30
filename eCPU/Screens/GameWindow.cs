@@ -21,7 +21,7 @@ namespace eCPU.Screens
         private const UInt32 IMAGE_BUFFER_START = 0x2400;
         private const UInt32 IMAGE_BUFFER_END = 0x3fff;
 
-        private System.Timers.Timer _timer = new System.Timers.Timer();
+        private object _lock = new object();
 
         SpaceInvaders _invaders;
 
@@ -30,13 +30,12 @@ namespace eCPU.Screens
             InitializeComponent();
 
             _invaders = inv;
+            _invaders.AttachDrawDelegate(DrawGame);
 
             InitWindow();
 
-            _timer.Interval = 100;
-            _timer.Elapsed += new ElapsedEventHandler(TimerElapsed);
-            _timer.Enabled = true;
         }
+
 
         private void InitWindow()
         {
@@ -50,36 +49,18 @@ namespace eCPU.Screens
 
         private void DrawGame()
         {
-
             byte[] vram = _invaders.GetVideoRAM();
-            Array.Reverse(vram);
-
             GCHandle gc = GCHandle.Alloc(vram, GCHandleType.Pinned);
-            IntPtr ptr = Marshal.UnsafeAddrOfPinnedArrayElement(vram, 0);
-            Bitmap bmp = new Bitmap( IMAGE_WIDTH, IMAGE_HEIGHT, 32, System.Drawing.Imaging.PixelFormat.Format1bppIndexed, ptr );
 
+            Array.Reverse(vram);
             gc.Free();
+
+            IntPtr ptr = Marshal.UnsafeAddrOfPinnedArrayElement(vram, 0);
+            Bitmap bmp = new Bitmap(IMAGE_WIDTH, IMAGE_HEIGHT, 32, System.Drawing.Imaging.PixelFormat.Format1bppIndexed, ptr);
 
             bmp.RotateFlip(RotateFlipType.Rotate90FlipNone);
             pbWindow.Image = bmp;
-            
         }
 
-
-        private void TimerElapsed(object sender, ElapsedEventArgs e)
-        {
-            DrawGame();
-        }
-
-        private void pbWindow_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            base.OnKeyDown(e);
-            //Key k = Keys.d
-        }
     }
 }

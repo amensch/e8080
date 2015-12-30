@@ -9,48 +9,46 @@ namespace eCPU.Machine8080
     public class SpaceInvaders
     {
 
+        private const byte START_VBLANK_OPCODE = 0xcf;
+        private const byte END_VBLANK_OPCODE = 0xd7;
+
+        // number of clock cycles per vblank interrupt.
+        private int VBLANK_INTERRUPT = 16666;
+        private byte _next_vblank_opcode = END_VBLANK_OPCODE;
+
         private i8080 _cpu;
 
         private Stopwatch _sw;
         private Timer _timer;
-        private long _lastTimeValue;
-        private long _lastInterruptTime;
-        private byte _lastInterruptNumber;
-        private bool _exit;
-        private long _cycleCount;
 
-        public SpaceInvaders()
+        private long _lastTimeValue = 0;
+        private long _cycleCount = 0;
+        private long _instructionCount = 0;
+        private long _vblankCount = 0;
+
+        public delegate void DrawDelegate();
+        private DrawDelegate _draw;
+
+        // Attach draw function from UI 
+        public void AttachDrawDelegate( DrawDelegate drawFunction )
         {
-            _exit = false;
+            _draw = drawFunction;
         }
-
-
 
         public i8080 CPU
         {
             get { return _cpu; }
         }
 
-        public void Run()
-        {
-            _exit = false;
-            _cycleCount = 0;
-            _lastTimeValue = 0;
-            _lastInterruptTime = 0;
-            _lastInterruptNumber = 1;
-            _sw = new Stopwatch();
-            _sw.Start();
-            _timer = new Timer();
-            _timer.Elapsed += new ElapsedEventHandler(TimerElapsed);
-            _timer.Interval = 1;
-            _timer.Enabled = true;
-        }
-
+        // Load the program code for execution
         public void LoadProgram()
         {
+            _lastTimeValue = 0;
+            _cycleCount = 0;
+            _instructionCount = 0;
+            _vblankCount = 0;
             LoadProgram(0x00);
         }
-
         public void LoadProgram(UInt16 startingAddress)
         {
             FileLoader load = new FileLoader();
@@ -73,7 +71,7 @@ namespace eCPU.Machine8080
 
             ShiftOffsetDevice _soDevice = new ShiftOffsetDevice();
             ShiftDevice _device = new ShiftDevice(_soDevice);
-            
+
             // shift register output to cpu
             _cpu.AddInputDevice(_device, 3);
 
@@ -90,6 +88,27 @@ namespace eCPU.Machine8080
             _cpu.AddOutputDevice(new SoundDevice(), 5);
 
         }
+
+        // Main function to begin program execution
+        public void Run()
+        {
+            _sw = new Stopwatch();
+            _sw.Start();
+            _timer = new Timer();
+            _timer.Elapsed += new ElapsedEventHandler(TimerElapsed);
+            _timer.Interval = 1;
+            _timer.Enabled = true;
+        }
+
+        // This function runs a specific number of instructions -- intended for debugging
+        public void RunInstructions(int numOfInstructions)
+        {
+            for( int i = 0; i < numOfInstructions; i++ )
+            {
+                RunOneInstruction();
+            }
+            if (_draw != null) _draw();
+        }
         
         public byte[] GetVideoRAM()
         {
@@ -98,11 +117,10 @@ namespace eCPU.Machine8080
             return vram;
         }
 
-
-
-        private void RunCycle()
+        // Called by the timer to run a specific number of clock cycles
+        // so the CPU stays on proper timing.
+        private void RunCPU()
         {
-
             _timer.Enabled = false;
 
             // Determine how much time has elapsed since the last cycle.
@@ -110,51 +128,59 @@ namespace eCPU.Machine8080
             long newTimeValue = _sw.ElapsedMilliseconds;
             long diffTime = newTimeValue - _lastTimeValue;
 
-            //Debug.WriteLine("diffTime=" + diffTime.ToString());
-
-            // The CPU interrupts twice for screen drawing at 60hz
-            // or 16 2/3 ms.  Determine if enough time has elapsed to
-            // create the interrupt.
-            if( (newTimeValue - _lastInterruptTime) > 16 )
-            {
-                _cpu.AddInterrupt(_lastInterruptNumber++);
-                _lastInterruptTime = newTimeValue;
-
-                if( _lastInterruptNumber > 2 )
-                {
-                    _lastInterruptNumber = 1;
-                }
-            }
-
             // At 2 Mhz this equals 2000 cycles per millisecond
             long cpuCyclesToRun = 2000 * diffTime;
-           // Debug.WriteLine("cpuCyclesToRun=" + cpuCyclesToRun.ToString());
             while (cpuCyclesToRun > 0)
             {
-                cpuCyclesToRun -= _cpu.ExecuteNext();
+                cpuCyclesToRun -= RunOneInstruction();
             }
 
             // Remember the elapsed time for the next interval
             _lastTimeValue = newTimeValue;
 
-            _cycleCount++;
-            //if( _cycleCount == 100 )
-            //{
-            //    _exit = true;
-            //}
-
-            //if( _exit )
-            //{
-            //    _timer.Enabled = false;
-            //}
-
             _timer.Enabled = true;
 
         }
 
+        // Call the CPU to run one instruction
+        private int RunOneInstruction()
+        {
+            int cycles;
+
+            cycles = _cpu.ExecuteNext();
+
+            _cycleCount += cycles;
+            _vblankCount += cycles;
+            _instructionCount++;
+
+            if (_vblankCount >= VBLANK_INTERRUPT)
+            {
+                _cpu.AddInterrupt(_next_vblank_opcode);
+                _vblankCount = 0;
+
+                if (_next_vblank_opcode == START_VBLANK_OPCODE)
+                    _next_vblank_opcode = END_VBLANK_OPCODE;
+                else
+                    _next_vblank_opcode = START_VBLANK_OPCODE;
+
+                if (_draw != null) _draw();
+            }
+            return cycles;
+        }
+
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
-            RunCycle();
+            RunCPU();
+        }
+
+        public long CountOfCycles
+        {
+            get { return _cycleCount; }
+        }
+
+        public long CountOfInstructions
+        {
+            get { return _instructionCount; }
         }
     }
 }

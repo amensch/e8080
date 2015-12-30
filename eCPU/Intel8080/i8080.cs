@@ -24,7 +24,7 @@ namespace eCPU.Intel8080
         private Dictionary<byte, IInputDevice> _inputDevices;
         private Dictionary<byte, IOutputDevice> _outputDevices;
 
-        private bool enable_interrupts;
+        private bool enable_interrupts = false;
 
         // for debugging only -- keep track of the previous instruction
         private UInt16 _lastpc = 0x00;
@@ -122,9 +122,9 @@ namespace eCPU.Intel8080
             int cycles = 0;
 
             // First check for an interrupt. 
-            if ( enable_interrupts )
+            if( _interrupts.TryDequeue(out interrupt_op))
             {
-                if( _interrupts.TryDequeue(out interrupt_op))
+                if (enable_interrupts)
                 {
                     enable_interrupts = false;
                     cycles = _opActions[interrupt_op]();
@@ -1490,6 +1490,11 @@ namespace eCPU.Intel8080
                 {
                     _regs.RegA = device.Read();
                 }
+                else
+                {
+                    // if no device is attached, zero out the register
+                    _regs.RegA = 0;
+                }
                 return 10;
             };
 
@@ -1761,7 +1766,8 @@ namespace eCPU.Intel8080
 
             if (call)
             {
-                PushRegister(_regs.ProgramCounter.Value);
+                // Push the program counter for the *next* instruction.
+                PushRegister((UInt16)(_regs.ProgramCounter.Value + 3));
                 _regs.ProgramCounter.Value = GetImmediateAddr();
                 return 17;
             }
@@ -1778,7 +1784,6 @@ namespace eCPU.Intel8080
             if(condition)
             {
                 _regs.ProgramCounter.Value = PopRegister();
-                _regs.ProgramCounter.Value += 3;  // if returning need the next instruction after the CALL
                 return 11;
             }
             else
@@ -1789,6 +1794,7 @@ namespace eCPU.Intel8080
 
         private int Op_RST(byte interrupt_num)
         {
+
             // push the ProgramCounter to the stack
             PushRegister(_regs.ProgramCounter.Value);
 
