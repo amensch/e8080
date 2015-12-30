@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pbWindow = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pbWindow)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,6 +46,10 @@
             this.pbWindow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbWindow.TabIndex = 0;
             this.pbWindow.TabStop = false;
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // GameWindow
             // 
@@ -62,5 +68,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pbWindow;
+        private System.Windows.Forms.Timer timer1;
     }
 }

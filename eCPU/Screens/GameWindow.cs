@@ -22,6 +22,7 @@ namespace eCPU.Screens
         private const UInt32 IMAGE_BUFFER_END = 0x3fff;
 
         private object _lock = new object();
+        private Image _screen;
 
         SpaceInvaders _invaders;
 
@@ -33,9 +34,8 @@ namespace eCPU.Screens
             _invaders.AttachDrawDelegate(DrawGame);
 
             InitWindow();
-
+            timer1.Enabled = true;
         }
-
 
         private void InitWindow()
         {
@@ -44,7 +44,7 @@ namespace eCPU.Screens
             {
                 g.FillRectangle( Brushes.Black, 0, 0, IMAGE_WIDTH, IMAGE_HEIGHT );
             }
-            pbWindow.Image = bmp;
+            _screen = (Image)bmp.Clone();
         }
 
         private void DrawGame()
@@ -59,8 +59,13 @@ namespace eCPU.Screens
             Bitmap bmp = new Bitmap(IMAGE_WIDTH, IMAGE_HEIGHT, 32, System.Drawing.Imaging.PixelFormat.Format1bppIndexed, ptr);
 
             bmp.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            pbWindow.Image = bmp;
+            _screen = (Image)bmp.Clone();
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (_screen != null)
+                pbWindow.Image = _screen;
+        }
     }
 }
