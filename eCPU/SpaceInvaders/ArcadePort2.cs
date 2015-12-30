@@ -25,9 +25,12 @@ namespace eCPU.SpaceInvaders
 
         public ArcadePort2(int Player2ShotKey, int Player2LeftKey, int Player2RightKey)
         {
-            _map.Add(Player2ShotKey, Port2Input.Player2Shot );
-            _map.Add(Player2LeftKey, Port2Input.Player2Left );
-            _map.Add(Player2RightKey, Port2Input.Player2Right );
+            _map.Add(Player2ShotKey, Port2Input.Player2Shot);
+            _map.Add(Player2LeftKey, Port2Input.Player2Left);
+            _map.Add(Player2RightKey, Port2Input.Player2Right);
+
+            // give me 5 lives
+            _port = (byte)(_port | (byte)Port2Input.ShipFlag2);
         }
 
         public void KeyDown(int key)

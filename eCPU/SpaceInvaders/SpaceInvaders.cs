@@ -3,6 +3,7 @@ using eCPU.Intel8080;
 using System.Diagnostics;
 using System.Timers;
 using System.IO;
+using System.Windows.Forms;
 
 namespace eCPU.SpaceInvaders
 {
@@ -16,9 +17,11 @@ namespace eCPU.SpaceInvaders
         private byte _next_vblank_opcode = END_VBLANK_OPCODE;
 
         private i8080 _cpu;
+        private ArcadePort1 _port1 = new ArcadePort1((int)Keys.C, (int)Keys.D1, (int)Keys.D2, (int)Keys.Up, (int)Keys.Left, (int)Keys.Right);
+        private ArcadePort2 _port2 = new ArcadePort2((int)Keys.E, (int)Keys.S, (int)Keys.F);
 
         private Stopwatch _sw;
-        private Timer _timer;
+        private System.Timers.Timer _timer;
 
         private long _lastTimeValue = 0;
         private long _cycleCount = 0;
@@ -72,21 +75,74 @@ namespace eCPU.SpaceInvaders
             ShiftOffsetDevice _soDevice = new ShiftOffsetDevice();
             ShiftDevice _device = new ShiftDevice(_soDevice);
 
-            // shift register output to cpu
+            // input device port 1: First Arcade Port
+            _cpu.AddInputDevice(_port1, 1);
+
+            // input device port 2: Second Arcade Port
+            _cpu.AddInputDevice(_port2, 2);
+
+            // input device port 3: shift register output to cpu
             _cpu.AddInputDevice(_device, 3);
 
-            // shift offset
+            // output device port 2: shift offset
             _cpu.AddOutputDevice(_soDevice, 2);
 
-            // shift register input from cpu
-            _cpu.AddOutputDevice(_device, 4);
-
-            // add sound port 3
+            // output device port 3: add sound port 
             _cpu.AddOutputDevice(new SoundDevice(), 3);
 
-            // add sound port 5
-            _cpu.AddOutputDevice(new SoundDevice(), 5);
+            // output device port 4: shift register input from cpu
+            _cpu.AddOutputDevice(_device, 4);
 
+            // output device port 5: add sound port 
+            _cpu.AddOutputDevice(new SoundDevice(), 5);
+        }
+
+        public void KeyDown(Keys key)
+        {
+            switch(key)
+            {
+                case Keys.C:
+                case Keys.D1:
+                case Keys.D2:
+                case Keys.Up:
+                case Keys.Left:
+                case Keys.Right:
+                    {
+                        _port1.KeyDown((int)key);
+                        break;
+                    }
+                case Keys.E:
+                case Keys.S:
+                case Keys.F:
+                    {
+                        _port2.KeyDown((int)key);
+                        break;
+                    }
+            }
+        }
+
+        public void KeyUp(Keys key)
+        {
+            switch (key)
+            {
+                case Keys.C:
+                case Keys.D1:
+                case Keys.D2:
+                case Keys.Up:
+                case Keys.Left:
+                case Keys.Right:
+                    {
+                        _port1.KeyUp((int)key);
+                        break;
+                    }
+                case Keys.E:
+                case Keys.S:
+                case Keys.F:
+                    {
+                        _port2.KeyUp((int)key);
+                        break;
+                    }
+            }
         }
 
         // Main function to begin program execution
@@ -94,7 +150,7 @@ namespace eCPU.SpaceInvaders
         {
             _sw = new Stopwatch();
             _sw.Start();
-            _timer = new Timer();
+            _timer = new System.Timers.Timer();
             _timer.Elapsed += new ElapsedEventHandler(TimerElapsed);
             _timer.Interval = 1;
             _timer.Enabled = true;

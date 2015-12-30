@@ -12,7 +12,7 @@ namespace eCPUUnitTests
         public void TestRegisterInit()
         {
             i8080ConditionalRegister reg = new i8080ConditionalRegister();
-            Assert.AreEqual( reg.Register, 0x02 );
+            Assert.AreEqual( reg.Register, 0x00 );
         }
 
         [TestMethod]

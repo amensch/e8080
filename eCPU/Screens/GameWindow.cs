@@ -73,7 +73,18 @@ namespace eCPU.Screens
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Application.Exit();
         }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            _invaders.KeyDown(e.KeyCode);
+        }
+
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+            _invaders.KeyUp(e.KeyCode);
+        }
+
     }
 }
