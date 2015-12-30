@@ -4,11 +4,10 @@ using System.Diagnostics;
 using System.Timers;
 using System.IO;
 
-namespace eCPU.Machine8080
+namespace eCPU.SpaceInvaders
 {
     public class SpaceInvaders
     {
-
         private const byte START_VBLANK_OPCODE = 0xcf;
         private const byte END_VBLANK_OPCODE = 0xd7;
 
@@ -41,7 +40,7 @@ namespace eCPU.Machine8080
         }
 
         // Load the program code for execution
-        public void LoadProgram()
+        public void Load()
         {
             _lastTimeValue = 0;
             _cycleCount = 0;
@@ -49,7 +48,8 @@ namespace eCPU.Machine8080
             _vblankCount = 0;
             LoadProgram(0x00);
         }
-        public void LoadProgram(UInt16 startingAddress)
+
+        private void LoadProgram(UInt16 startingAddress)
         {
             FileLoader load = new FileLoader();
             string dir = "C:\\Users\\adam\\Downloads\\invaders";

@@ -1,63 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using eCPU.Intel8080;
-using System.IO;
-using System.Diagnostics;
-using eCPU.Machine8080;
 
 namespace eCPU
 {
-    public partial class MainForm : Form
+    public partial class DebugWindow : Form
     {
-        private SpaceInvaders _invaders = new SpaceInvaders();
+        private SpaceInvaders.SpaceInvaders _invaders;
 
-        public MainForm()
+        public DebugWindow(SpaceInvaders.SpaceInvaders invaders)
         {
             InitializeComponent();
-        }
-
-        private void TestLoad()
-        {
-            FileLoader load = new FileLoader();
-            string dir = "C:\\Users\\adam\\Downloads\\invaders";
-            //string dir = "C:\\Users\\menschas\\Downloads\\invaders";
-
-            load.AddFile(Path.Combine(dir,"invaders.h"));
-            load.AddFile(Path.Combine(dir,"invaders.g"));
-            load.AddFile(Path.Combine(dir,"invaders.f"));
-            load.AddFile(Path.Combine(dir,"invaders.e"));
-
-            //load.AddFile("C:\\Users\\adam\\Downloads\\invaders\\cpudiag.bin");
-
-            //Disassemble8080 dasm = new Disassemble8080();
-            //string output = dasm.Disassemble(load);
-            //File.WriteAllText("C:\\Users\\adam\\Downloads\\invaders\\dasmtest.txt", output);
-
-            //_invaders.CPU = new i8080();
-            //_invaders.CPU.LoadInstructions(load.LoadData(), 0x00);
-
-            //do
-            //{
-            //    _invaders.CPU.ExecuteNext();
-            //    if (_invaders.CPU.Registers.ProgramCounter > 0x2000)
-            //    {
-            //        count++;
-            //    }
-            //    count++;
-            //} while (true);
-        }
-
-        private void btnLoad_Click(object sender, EventArgs e)
-        {
-            _invaders.LoadProgram(0x00);
-            WriteScreen();
+            _invaders = invaders;
         }
 
         private void WriteScreen()
@@ -105,10 +58,6 @@ namespace eCPU
             WriteScreen();
         }
 
-        private void btnFire_Click(object sender, EventArgs e)
-        {
-            _invaders.Run();
-        }
 
         private void btnRunN_Click(object sender, EventArgs e)
         {
@@ -120,11 +69,6 @@ namespace eCPU
             WriteScreen();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            eCPU.Screens.GameWindow frm = new eCPU.Screens.GameWindow(_invaders);
-            frm.Show();
-        }
     }
 }
 

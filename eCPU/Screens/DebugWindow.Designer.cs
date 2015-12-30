@@ -1,6 +1,6 @@
 ﻿namespace eCPU
 {
-    partial class MainForm
+    partial class DebugWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -38,9 +38,7 @@
             this.Data = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label15 = new System.Windows.Forms.Label();
             this.txtNext = new System.Windows.Forms.TextBox();
-            this.btnLoad = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
-            this.btnFire = new System.Windows.Forms.Button();
             this.txtCount = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -56,7 +54,6 @@
             this.txtFlags = new System.Windows.Forms.TextBox();
             this.txtRun = new System.Windows.Forms.TextBox();
             this.btnRunN = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnInt1 = new System.Windows.Forms.Button();
             this.btnInt2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridPC)).BeginInit();
@@ -168,38 +165,16 @@
             this.txtNext.Size = new System.Drawing.Size(238, 22);
             this.txtNext.TabIndex = 30;
             // 
-            // btnLoad
-            // 
-            this.btnLoad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoad.Location = new System.Drawing.Point(294, 291);
-            this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(94, 28);
-            this.btnLoad.TabIndex = 31;
-            this.btnLoad.Text = "Load";
-            this.btnLoad.UseVisualStyleBackColor = true;
-            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
-            // 
             // btnNext
             // 
             this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNext.Location = new System.Drawing.Point(413, 291);
+            this.btnNext.Location = new System.Drawing.Point(353, 246);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(94, 28);
             this.btnNext.TabIndex = 32;
             this.btnNext.Text = "Run 1";
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // btnFire
-            // 
-            this.btnFire.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFire.Location = new System.Drawing.Point(294, 328);
-            this.btnFire.Name = "btnFire";
-            this.btnFire.Size = new System.Drawing.Size(94, 28);
-            this.btnFire.TabIndex = 33;
-            this.btnFire.Text = "Fire Away";
-            this.btnFire.UseVisualStyleBackColor = true;
-            this.btnFire.Click += new System.EventHandler(this.btnFire_Click);
             // 
             // txtCount
             // 
@@ -336,7 +311,7 @@
             // txtRun
             // 
             this.txtRun.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRun.Location = new System.Drawing.Point(517, 331);
+            this.txtRun.Location = new System.Drawing.Point(457, 286);
             this.txtRun.Name = "txtRun";
             this.txtRun.Size = new System.Drawing.Size(75, 22);
             this.txtRun.TabIndex = 48;
@@ -345,23 +320,13 @@
             // btnRunN
             // 
             this.btnRunN.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRunN.Location = new System.Drawing.Point(414, 325);
+            this.btnRunN.Location = new System.Drawing.Point(354, 280);
             this.btnRunN.Name = "btnRunN";
             this.btnRunN.Size = new System.Drawing.Size(94, 28);
             this.btnRunN.TabIndex = 49;
             this.btnRunN.Text = "Run N";
             this.btnRunN.UseVisualStyleBackColor = true;
             this.btnRunN.Click += new System.EventHandler(this.btnRunN_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(294, 237);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(97, 37);
-            this.button1.TabIndex = 50;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnInt1
             // 
@@ -383,12 +348,11 @@
             this.btnInt2.Text = "Int 2";
             this.btnInt2.UseVisualStyleBackColor = true;
             // 
-            // MainForm
+            // DebugWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(605, 420);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnRunN);
             this.Controls.Add(this.txtRun);
             this.Controls.Add(this.txtFlags);
@@ -404,9 +368,7 @@
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtCount);
             this.Controls.Add(this.label16);
-            this.Controls.Add(this.btnFire);
             this.Controls.Add(this.btnNext);
-            this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.txtNext);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.gridPC);
@@ -415,7 +377,7 @@
             this.Controls.Add(this.txtPC);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label1);
-            this.Name = "MainForm";
+            this.Name = "DebugWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "8080 CPU";
             ((System.ComponentModel.ISupportInitialize)(this.gridPC)).EndInit();
@@ -436,9 +398,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Data;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox txtNext;
-        private System.Windows.Forms.Button btnLoad;
         private System.Windows.Forms.Button btnNext;
-        private System.Windows.Forms.Button btnFire;
         private System.Windows.Forms.TextBox txtCount;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label10;
@@ -454,7 +414,6 @@
         private System.Windows.Forms.TextBox txtFlags;
         private System.Windows.Forms.TextBox txtRun;
         private System.Windows.Forms.Button btnRunN;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnInt1;
         private System.Windows.Forms.Button btnInt2;
     }

@@ -1,4 +1,4 @@
-﻿using eCPU.Machine8080;
+﻿using eCPU.SpaceInvaders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eCPUUnitTests

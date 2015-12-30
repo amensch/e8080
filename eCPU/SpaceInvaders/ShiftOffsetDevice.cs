@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using eCPU.Intel8080;
 
-namespace eCPU.Machine8080
+namespace eCPU.SpaceInvaders
 {
     public class ShiftOffsetDevice : IOutputDevice
     {

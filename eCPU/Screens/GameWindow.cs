@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Timers;
-using System.IO;
-using eCPU.Machine8080;
 using System.Runtime.InteropServices;
 
 namespace eCPU.Screens
@@ -18,33 +9,33 @@ namespace eCPU.Screens
     {
         private const int IMAGE_WIDTH = 256;
         private const int IMAGE_HEIGHT = 224;
-        private const UInt32 IMAGE_BUFFER_START = 0x2400;
-        private const UInt32 IMAGE_BUFFER_END = 0x3fff;
 
-        private object _lock = new object();
         private Image _screen;
+        private SpaceInvaders.SpaceInvaders _invaders;
 
-        SpaceInvaders _invaders;
-
-        public GameWindow(SpaceInvaders inv)
+        public GameWindow()
         {
             InitializeComponent();
+            InitWindow();
 
-            _invaders = inv;
+            _invaders = new SpaceInvaders.SpaceInvaders();
             _invaders.AttachDrawDelegate(DrawGame);
 
-            InitWindow();
+            _invaders.Load();
+
             timer1.Enabled = true;
         }
 
         private void InitWindow()
         {
-            Bitmap bmp = new Bitmap( IMAGE_WIDTH, IMAGE_HEIGHT );
-            using( Graphics g = Graphics.FromImage( bmp ) )
+            using (Bitmap bmp = new Bitmap(IMAGE_WIDTH, IMAGE_HEIGHT))
             {
-                g.FillRectangle( Brushes.Black, 0, 0, IMAGE_WIDTH, IMAGE_HEIGHT );
+                using (Graphics g = Graphics.FromImage(bmp))
+                {
+                    g.FillRectangle(Brushes.Black, 0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
+                }
+                _screen = (Image)bmp.Clone();
             }
-            _screen = (Image)bmp.Clone();
         }
 
         private void DrawGame()
@@ -56,16 +47,33 @@ namespace eCPU.Screens
             gc.Free();
 
             IntPtr ptr = Marshal.UnsafeAddrOfPinnedArrayElement(vram, 0);
-            Bitmap bmp = new Bitmap(IMAGE_WIDTH, IMAGE_HEIGHT, 32, System.Drawing.Imaging.PixelFormat.Format1bppIndexed, ptr);
-
-            bmp.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            _screen = (Image)bmp.Clone();
+            using (Bitmap bmp = new Bitmap(IMAGE_WIDTH, IMAGE_HEIGHT, 32, System.Drawing.Imaging.PixelFormat.Format1bppIndexed, ptr))
+            {
+                bmp.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                _screen = (Image)bmp.Clone();
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (_screen != null)
                 pbWindow.Image = _screen;
+        }
+
+        private void runSpaceInvadersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _invaders.Run();
+        }
+
+        private void debugSpaceInvadersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DebugWindow frm = new DebugWindow(_invaders);
+            frm.Show();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

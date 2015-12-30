@@ -56,23 +56,23 @@
     <Compile Include="Intel8080\IOutputDevice.cs" />
     <Compile Include="Loader\FileLoader.cs" />
     <Compile Include="Loader\ICodeLoader.cs" />
-    <Compile Include="Machine8080\ArcadePort1.cs" />
-    <Compile Include="Machine8080\ArcadePort2.cs" />
-    <Compile Include="Machine8080\ShiftOffsetDevice.cs" />
-    <Compile Include="Machine8080\ShiftDevice.cs" />
-    <Compile Include="Machine8080\SoundDevice.cs" />
-    <Compile Include="Machine8080\SpaceInvaders.cs" />
+    <Compile Include="SpaceInvaders\ArcadePort1.cs" />
+    <Compile Include="SpaceInvaders\ArcadePort2.cs" />
+    <Compile Include="SpaceInvaders\ShiftOffsetDevice.cs" />
+    <Compile Include="SpaceInvaders\ShiftDevice.cs" />
+    <Compile Include="SpaceInvaders\SoundDevice.cs" />
+    <Compile Include="SpaceInvaders\SpaceInvaders.cs" />
     <Compile Include="Screens\GameWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Screens\GameWindow.Designer.cs">
       <DependentUpon>GameWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Screens\MainForm.cs">
+    <Compile Include="Screens\DebugWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Screens\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="Screens\DebugWindow.Designer.cs">
+      <DependentUpon>DebugWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,8 +88,8 @@
     <EmbeddedResource Include="Screens\GameWindow.resx">
       <DependentUpon>GameWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Screens\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="Screens\DebugWindow.resx">
+      <DependentUpon>DebugWindow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -106,7 +106,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Machine8080\8080 Port Info.txt" />
+    <Content Include="SpaceInvaders\8080 Port Info.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
