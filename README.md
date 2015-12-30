@@ -11,3 +11,6 @@ There exists a full suite of unit tests for the op codes and other functionality
 To be done is to complete the code for handling interrupts of user input as well as the graphics.
 There is much refactoring to be done.  The purpose here was to provide a working learning tool for myself
 using C#.  The focus is more on design and the use of automated tests rather than raw speed. 
+
+30-Dec-2015
+The game is now fully working and playable. Still need to integrate game ROM into the source.

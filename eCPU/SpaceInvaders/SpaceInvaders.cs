@@ -19,6 +19,8 @@ namespace eCPU.SpaceInvaders
         private i8080 _cpu;
         private ArcadePort1 _port1 = new ArcadePort1((int)Keys.C, (int)Keys.D1, (int)Keys.D2, (int)Keys.Up, (int)Keys.Left, (int)Keys.Right);
         private ArcadePort2 _port2 = new ArcadePort2((int)Keys.E, (int)Keys.S, (int)Keys.F);
+        private SoundDevice _sound3 = new SoundDevice(3);
+        private SoundDevice _sound5 = new SoundDevice(5);
 
         private Stopwatch _sw;
         private System.Timers.Timer _timer;
@@ -55,12 +57,11 @@ namespace eCPU.SpaceInvaders
         private void LoadProgram(UInt16 startingAddress)
         {
             FileLoader load = new FileLoader();
-            string dir = "C:\\Users\\adam\\Downloads\\invaders";
 
-            load.AddFile(Path.Combine(dir, "invaders.h"));
-            load.AddFile(Path.Combine(dir, "invaders.g"));
-            load.AddFile(Path.Combine(dir, "invaders.f"));
-            load.AddFile(Path.Combine(dir, "invaders.e"));
+            load.AddFile("SpaceInvaders\\ROM\\invaders.h");
+            load.AddFile("SpaceInvaders\\ROM\\invaders.g");
+            load.AddFile("SpaceInvaders\\ROM\\invaders.f");
+            load.AddFile("SpaceInvaders\\ROM\\invaders.e");
 
             //load.AddFile("C:\\Users\\adam\\Downloads\\i8080-emulator-master\\i8080-emulator-master\\diag\\cpudiag.bin");
 
@@ -88,13 +89,13 @@ namespace eCPU.SpaceInvaders
             _cpu.AddOutputDevice(_soDevice, 2);
 
             // output device port 3: add sound port 
-            _cpu.AddOutputDevice(new SoundDevice(), 3);
+            _cpu.AddOutputDevice(_sound3, 3);
 
             // output device port 4: shift register input from cpu
             _cpu.AddOutputDevice(_device, 4);
 
             // output device port 5: add sound port 
-            _cpu.AddOutputDevice(new SoundDevice(), 5);
+            _cpu.AddOutputDevice(_sound5, 5);
         }
 
         public void KeyDown(Keys key)
