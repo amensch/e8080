@@ -31,6 +31,9 @@ namespace eCPU.SpaceInvaders
 
             // give me 5 lives
             _port = (byte)(_port | (byte)Port2Input.ShipFlag2);
+
+            // give me an extra life at 1000 points instead of 1500
+            _port = (byte)(_port | (byte)Port2Input.ExtraShipFlag);
         }
 
         public void KeyDown(int key)

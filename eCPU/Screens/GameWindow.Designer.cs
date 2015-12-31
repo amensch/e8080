@@ -43,10 +43,10 @@
             // pbWindow
             // 
             this.pbWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbWindow.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pbWindow.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbWindow.Location = new System.Drawing.Point(0, 24);
             this.pbWindow.Name = "pbWindow";
-            this.pbWindow.Size = new System.Drawing.Size(451, 397);
+            this.pbWindow.Size = new System.Drawing.Size(451, 395);
             this.pbWindow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbWindow.TabIndex = 0;
             this.pbWindow.TabStop = false;

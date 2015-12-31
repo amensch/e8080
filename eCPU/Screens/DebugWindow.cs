@@ -55,7 +55,7 @@ namespace eCPU
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            _game.CPU.ExecuteNext();
+            _game.RunInstructions(1);
             WriteScreen();
         }
 
