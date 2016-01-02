@@ -106,7 +106,7 @@
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "GameWindow";
-            this.Text = "GameWindow";
+            this.Text = "Space Invaders";
             ((System.ComponentModel.ISupportInitialize)(this.pbWindow)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

@@ -85,7 +85,7 @@ namespace KDS.e8080.SpaceInvaders
             IntPtr ptr = Marshal.UnsafeAddrOfPinnedArrayElement(vram, 0);
             using (Bitmap bmp = new Bitmap(IMAGE_WIDTH, IMAGE_HEIGHT, 32, System.Drawing.Imaging.PixelFormat.Format1bppIndexed, ptr))
             {
-                bmp.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                bmp.RotateFlip(RotateFlipType.Rotate90FlipNone);
                 _screen = (Image)bmp.Clone();
             }
         }
@@ -94,18 +94,16 @@ namespace KDS.e8080.SpaceInvaders
         {
             FileLoader load = new FileLoader();
 
-            //load.AddFile("SpaceInvaders\\ROM\\invaders.h");
-            //load.AddFile("SpaceInvaders\\ROM\\invaders.g");
-            //load.AddFile("SpaceInvaders\\ROM\\invaders.f");
-            //load.AddFile("SpaceInvaders\\ROM\\invaders.e");
-            load.AddFile("C:\\Users\\adam\\Downloads\\maze\\maze.h");
-            load.AddFile("C:\\Users\\adam\\Downloads\\maze\\maze.g");
+            load.AddFile("SpaceInvaders\\ROM\\invaders.h");
+            load.AddFile("SpaceInvaders\\ROM\\invaders.g");
+            load.AddFile("SpaceInvaders\\ROM\\invaders.f");
+            load.AddFile("SpaceInvaders\\ROM\\invaders.e");
 
             //load.AddFile("C:\\Users\\adam\\Downloads\\i8080-emulator-master\\i8080-emulator-master\\diag\\cpudiag.bin");
 
             //Disassemble8080 dasm = new Disassemble8080();
-            //string output = dasm.Disassemble(load, 0x100);
-            //File.WriteAllText("C:\\Users\\adam\\Downloads\\i8080-emulator-master\\i8080-emulator-master\\diag\\cpudiagdasm.txt", output);
+            //string output = dasm.Disassemble(load, 0x00);
+            //File.WriteAllText("C:\\Users\\adam\\Documents\\invaders_dasm.txt", output);
 
 
             _cpu = new i8080();

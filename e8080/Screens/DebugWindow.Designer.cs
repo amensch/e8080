@@ -379,7 +379,7 @@
             this.Controls.Add(this.label1);
             this.Name = "DebugWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "8080 CPU";
+            this.Text = "8080 Debugger";
             ((System.ComponentModel.ISupportInitialize)(this.gridPC)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
