@@ -57,7 +57,7 @@
     <Compile Include="ShiftRegisterTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\eCPU\e8080.csproj">
+    <ProjectReference Include="..\e8080\e8080.csproj">
       <Project>{8f890270-3047-4fa8-9ba2-422b1f82e665}</Project>
       <Name>e8080</Name>
     </ProjectReference>

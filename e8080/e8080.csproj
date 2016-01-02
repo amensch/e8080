@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KDS.e8080</RootNamespace>
-    <AssemblyName>eCPU</AssemblyName>
+    <AssemblyName>e8080</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
@@ -63,7 +63,7 @@
   <ItemGroup>
     <Compile Include="Disassembler\Disassemble8080.cs" />
     <Compile Include="Disassembler\ICodeDisassembler.cs" />
-    <Compile Include="IArcadeGame.cs" />
+    <Compile Include="SpaceInvaders\IArcadeGame.cs" />
     <Compile Include="Intel8080\i8080.cs" />
     <Compile Include="Intel8080\i8080ProgramCounter.cs" />
     <Compile Include="Intel8080\i8080Registers.cs" />

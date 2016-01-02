@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "e8080", "eCPU\e8080.csproj", "{8F890270-3047-4FA8-9BA2-422B1F82E665}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "e8080", "e8080\e8080.csproj", "{8F890270-3047-4FA8-9BA2-422B1F82E665}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "e8080UnitTests", "eCPUUnitTests\e8080UnitTests.csproj", "{D389F7F9-7668-4DC8-B193-58692B9BB2E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "e8080UnitTests", "e8080UnitTests\e8080UnitTests.csproj", "{D389F7F9-7668-4DC8-B193-58692B9BB2E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
