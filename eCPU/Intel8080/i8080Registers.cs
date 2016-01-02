@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace eCPU.Intel8080
+namespace KDS.e8080
 {
     public class i8080Registers
     {

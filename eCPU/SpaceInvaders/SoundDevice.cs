@@ -1,8 +1,8 @@
-﻿using eCPU.Intel8080;
+﻿using KDS.e8080;
 using System.Diagnostics;
 using System.Media;
 
-namespace eCPU.SpaceInvaders
+namespace KDS.e8080.SpaceInvaders
 {
     class SoundDevice : IOutputDevice
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace eCPU.Intel8080
+namespace KDS.e8080
 {
     public interface IInputDevice
     {

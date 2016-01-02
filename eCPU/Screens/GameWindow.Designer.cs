@@ -1,4 +1,4 @@
-﻿namespace eCPU.Screens
+﻿namespace KDS.e8080
 {
     partial class GameWindow
     {

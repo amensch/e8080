@@ -1,7 +1,7 @@
 ﻿using System;
-using eCPU.Intel8080;
+using KDS.e8080;
 
-namespace eCPU.SpaceInvaders
+namespace KDS.e8080.SpaceInvaders
 {
     public class ShiftDevice : IInputDevice, IOutputDevice
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Collections.Concurrent;
 
-namespace eCPU.Intel8080
+namespace KDS.e8080
 {
     public class i8080
     {

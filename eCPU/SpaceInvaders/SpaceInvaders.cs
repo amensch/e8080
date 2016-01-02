@@ -1,14 +1,14 @@
 ﻿using System;
-using eCPU.Intel8080;
+using KDS.Loader;
 using System.Diagnostics;
 using System.Timers;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace eCPU.SpaceInvaders
+namespace KDS.e8080.SpaceInvaders
 {
-    public class SpaceInvaders : IArcadeGame
+    public class SpaceInvaders : IArcadeGame, IDisposable
     {
 
         private const int IMAGE_WIDTH = 256;
@@ -85,7 +85,7 @@ namespace eCPU.SpaceInvaders
             IntPtr ptr = Marshal.UnsafeAddrOfPinnedArrayElement(vram, 0);
             using (Bitmap bmp = new Bitmap(IMAGE_WIDTH, IMAGE_HEIGHT, 32, System.Drawing.Imaging.PixelFormat.Format1bppIndexed, ptr))
             {
-                bmp.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                bmp.RotateFlip(RotateFlipType.Rotate180FlipNone);
                 _screen = (Image)bmp.Clone();
             }
         }
@@ -94,10 +94,12 @@ namespace eCPU.SpaceInvaders
         {
             FileLoader load = new FileLoader();
 
-            load.AddFile("SpaceInvaders\\ROM\\invaders.h");
-            load.AddFile("SpaceInvaders\\ROM\\invaders.g");
-            load.AddFile("SpaceInvaders\\ROM\\invaders.f");
-            load.AddFile("SpaceInvaders\\ROM\\invaders.e");
+            //load.AddFile("SpaceInvaders\\ROM\\invaders.h");
+            //load.AddFile("SpaceInvaders\\ROM\\invaders.g");
+            //load.AddFile("SpaceInvaders\\ROM\\invaders.f");
+            //load.AddFile("SpaceInvaders\\ROM\\invaders.e");
+            load.AddFile("C:\\Users\\adam\\Downloads\\maze\\maze.h");
+            load.AddFile("C:\\Users\\adam\\Downloads\\maze\\maze.g");
 
             //load.AddFile("C:\\Users\\adam\\Downloads\\i8080-emulator-master\\i8080-emulator-master\\diag\\cpudiag.bin");
 
@@ -275,5 +277,40 @@ namespace eCPU.SpaceInvaders
         {
             get { return _instructionCount; }
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    _timer.Dispose();
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                disposedValue = true;
+            }
+        }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        // ~SpaceInvaders() {
+        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+        //   Dispose(false);
+        // }
+
+        // This code added to correctly implement the disposable pattern.
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }

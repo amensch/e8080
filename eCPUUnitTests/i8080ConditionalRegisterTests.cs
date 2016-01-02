@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using eCPU.Intel8080;
+using KDS.e8080;
 
 namespace eCPUUnitTests
 {

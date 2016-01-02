@@ -1,4 +1,4 @@
-﻿using eCPU.SpaceInvaders;
+﻿using KDS.e8080.SpaceInvaders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace eCPUUnitTests

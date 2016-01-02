@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
-using eCPU.Intel8080;
+using KDS.e8080;
 
-namespace eCPU
+namespace KDS.e8080
 {
     public interface IArcadeGame
     {

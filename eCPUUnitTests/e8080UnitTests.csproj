@@ -50,7 +50,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ArcadePortTests.cs" />
     <Compile Include="i8080ConditionalRegisterTests.cs" />
     <Compile Include="i8080OpTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,9 +57,9 @@
     <Compile Include="ShiftRegisterTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\eCPU\eCPU.csproj">
+    <ProjectReference Include="..\eCPU\e8080.csproj">
       <Project>{8f890270-3047-4fa8-9ba2-422b1f82e665}</Project>
-      <Name>eCPU</Name>
+      <Name>e8080</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

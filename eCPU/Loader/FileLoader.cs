@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 
-namespace eCPU
+namespace KDS.Loader
 {
     class FileLoader : ICodeLoader
     {

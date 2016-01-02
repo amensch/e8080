@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Text;
+using KDS.Loader;
 
-namespace eCPU.Intel8080
+namespace KDS.e8080
 {
     class Disassemble8080 : ICodeDisassembler
     {

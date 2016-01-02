@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using eCPU.Intel8080;
+using KDS.e8080;
 
-namespace eCPU
+namespace KDS.e8080
 {
     public partial class DebugWindow : Form
     {

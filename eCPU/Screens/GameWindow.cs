@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace eCPU.Screens
+namespace KDS.e8080
 {
     public partial class GameWindow : Form
     {

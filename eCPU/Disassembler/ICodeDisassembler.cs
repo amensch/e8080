@@ -1,5 +1,6 @@
-﻿
-namespace eCPU
+﻿using KDS.Loader;
+
+namespace KDS.e8080
 {
     interface ICodeDisassembler
     {

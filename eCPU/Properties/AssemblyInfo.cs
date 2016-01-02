@@ -5,10 +5,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle( "eCPU" )]
-[assembly: AssemblyDescription( "" )]
+[assembly: AssemblyTitle("e-8080")]
+[assembly: AssemblyDescription("An 8080 emulator with Space Invaders")]
 [assembly: AssemblyConfiguration( "" )]
-[assembly: AssemblyCompany( "" )]
+[assembly: AssemblyCompany("Katie Drive Studio")]
 [assembly: AssemblyProduct( "eCPU" )]
 [assembly: AssemblyCopyright( "Copyright ©  2015" )]
 [assembly: AssemblyTrademark( "" )]

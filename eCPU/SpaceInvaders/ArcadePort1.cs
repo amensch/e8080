@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using eCPU.Intel8080;
+using KDS.e8080;
 
-namespace eCPU.SpaceInvaders
+namespace KDS.e8080.SpaceInvaders
 {
     class ArcadePort1 : IInputDevice
     {

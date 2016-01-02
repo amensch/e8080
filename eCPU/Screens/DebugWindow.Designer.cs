@@ -1,4 +1,4 @@
-﻿namespace eCPU
+﻿namespace KDS.e8080
 {
     partial class DebugWindow
     {

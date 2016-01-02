@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using eCPU.Screens;
 
-namespace eCPU
+namespace KDS.e8080
 {
     static class Program
     {
