@@ -33,9 +33,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txtPC = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.gridPC = new System.Windows.Forms.DataGridView();
-            this.PC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Data = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label15 = new System.Windows.Forms.Label();
             this.txtNext = new System.Windows.Forms.TextBox();
             this.btnNext = new System.Windows.Forms.Button();
@@ -56,7 +53,9 @@
             this.btnRunN = new System.Windows.Forms.Button();
             this.btnInt1 = new System.Windows.Forms.Button();
             this.btnInt2 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.gridPC)).BeginInit();
+            this.listOps = new System.Windows.Forms.ListView();
+            this.columnPC = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnData = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // label1
@@ -111,40 +110,6 @@
             this.label9.TabIndex = 14;
             this.label9.Text = "PC:";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // gridPC
-            // 
-            this.gridPC.AllowUserToAddRows = false;
-            this.gridPC.AllowUserToDeleteRows = false;
-            this.gridPC.AllowUserToResizeColumns = false;
-            this.gridPC.AllowUserToResizeRows = false;
-            this.gridPC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridPC.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.PC,
-            this.Data});
-            this.gridPC.Location = new System.Drawing.Point(12, 12);
-            this.gridPC.MultiSelect = false;
-            this.gridPC.Name = "gridPC";
-            this.gridPC.ReadOnly = true;
-            this.gridPC.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.gridPC.Size = new System.Drawing.Size(240, 399);
-            this.gridPC.TabIndex = 28;
-            // 
-            // PC
-            // 
-            this.PC.HeaderText = "PC";
-            this.PC.Name = "PC";
-            this.PC.ReadOnly = true;
-            this.PC.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.PC.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Data
-            // 
-            this.Data.HeaderText = "Data";
-            this.Data.Name = "Data";
-            this.Data.ReadOnly = true;
-            this.Data.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Data.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // label15
             // 
@@ -348,11 +313,39 @@
             this.btnInt2.Text = "Int 2";
             this.btnInt2.UseVisualStyleBackColor = true;
             // 
+            // listOps
+            // 
+            this.listOps.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnPC,
+            this.columnData});
+            this.listOps.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listOps.GridLines = true;
+            this.listOps.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listOps.Location = new System.Drawing.Point(13, 12);
+            this.listOps.MultiSelect = false;
+            this.listOps.Name = "listOps";
+            this.listOps.OwnerDraw = true;
+            this.listOps.Size = new System.Drawing.Size(233, 295);
+            this.listOps.TabIndex = 50;
+            this.listOps.UseCompatibleStateImageBehavior = false;
+            this.listOps.View = System.Windows.Forms.View.Details;
+            // 
+            // columnPC
+            // 
+            this.columnPC.Text = "PC";
+            this.columnPC.Width = 50;
+            // 
+            // columnData
+            // 
+            this.columnData.Text = "Instruction";
+            this.columnData.Width = 150;
+            // 
             // DebugWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(605, 420);
+            this.ClientSize = new System.Drawing.Size(605, 319);
+            this.Controls.Add(this.listOps);
             this.Controls.Add(this.btnRunN);
             this.Controls.Add(this.txtRun);
             this.Controls.Add(this.txtFlags);
@@ -371,7 +364,6 @@
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.txtNext);
             this.Controls.Add(this.label15);
-            this.Controls.Add(this.gridPC);
             this.Controls.Add(this.txtSP);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtPC);
@@ -380,7 +372,6 @@
             this.Name = "DebugWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "8080 Debugger";
-            ((System.ComponentModel.ISupportInitialize)(this.gridPC)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -393,9 +384,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtPC;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.DataGridView gridPC;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PC;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Data;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox txtNext;
         private System.Windows.Forms.Button btnNext;
@@ -416,6 +404,9 @@
         private System.Windows.Forms.Button btnRunN;
         private System.Windows.Forms.Button btnInt1;
         private System.Windows.Forms.Button btnInt2;
+        private System.Windows.Forms.ListView listOps;
+        private System.Windows.Forms.ColumnHeader columnPC;
+        private System.Windows.Forms.ColumnHeader columnData;
     }
 }
 

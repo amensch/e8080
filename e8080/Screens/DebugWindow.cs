@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Drawing;
 using KDS.e8080;
 
 namespace KDS.e8080
@@ -11,6 +12,8 @@ namespace KDS.e8080
         public DebugWindow(IArcadeGame game)
         {
             InitializeComponent();
+            listOps.DrawColumnHeader += listView1_DrawColumnHeader;
+            listOps.DrawItem += listView1_DrawItem;
             _game = game;
         }
 
@@ -51,6 +54,38 @@ namespace KDS.e8080
             string next;
             UInt32 bytes = Disassemble8080.DisassembleNext(_game.CPU.Memory, _game.CPU.Registers.ProgramCounter.Value, 0x00, out next);
             txtNext.Text = next;
+            FillListView();
+        }
+
+        private void FillListView()
+        {
+            UInt32 pc = _game.CPU.Registers.ProgramCounter.Value;
+            UInt32 this_pc = pc;
+            string text;
+
+            listOps.SuspendLayout();
+
+            // fill the listbox with the next 20 instructions
+            listOps.Items.Clear();
+
+            for( int i=0; i<13; i++ )
+            {
+                pc += Disassemble8080.DisassembleNext(_game.CPU.Memory, pc, 0x00, out text);
+                listOps.Items.Add(new ListViewItem(new string[] { "$" + this_pc.ToString("X4"), text.Substring(5).Replace("\t"," ") }));
+                this_pc = pc;
+            }
+            listOps.ResumeLayout();
+        }
+
+        private void listView1_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            e.Graphics.FillRectangle(Brushes.LightGray, e.Bounds);
+            e.DrawText();
+        }
+
+        private void listView1_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            e.DrawDefault = true;
         }
 
         private void btnNext_Click(object sender, EventArgs e)
@@ -58,7 +93,6 @@ namespace KDS.e8080
             _game.RunInstructions(1);
             WriteScreen();
         }
-
 
         private void btnRunN_Click(object sender, EventArgs e)
         {
